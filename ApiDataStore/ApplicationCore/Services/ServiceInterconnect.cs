@@ -18,9 +18,14 @@ namespace ApplicationCore.Services
 
         }
 
-        public Task<IEnumerable<T_InterConnect>> getByNIT(string NIT)
+        public async Task<IEnumerable<T_InterConnect>> getByNIT(string NIT)
         {
-            return repository.getByNIT(NIT);
+            return await repository.getByNIT(NIT);
+        }
+
+        public async Task<IEnumerable<T_InterConnect>> getByNITDB(string NIT)
+        {
+            return await repository.getByNITDB(NIT);
         }
     }
 }

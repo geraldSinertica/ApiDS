@@ -25,10 +25,10 @@ namespace ApiDataStore.Controllers
 
                 IEnumerable<T_InterConnect> reportes = await service.getByNIT(NIT);
 
-                if (reportes == null)
+                if (reportes == null || !reportes.Any())
                 {
                     response.StatusCode = 404;
-                    response.Message = "Reportes no encontrados ";
+                    response.Message = "Reportes no encontrados verifique el NIT ";
 
                 }
                 else
@@ -50,6 +50,42 @@ namespace ApiDataStore.Controllers
             }
         }
 
+        [Route("byNITDB")]
+        public async Task<IHttpActionResult> getByNITDB(string NIT)
+        {
+            ResponseModel response = new ResponseModel();
+            try
+            {
+
+                IServiceInterconnectt service = new ServiceInterconnect();
+                IEnumerable<T_InterConnect> reportes = new List<T_InterConnect>();
+
+               reportes = await service.getByNITDB(NIT);
+
+                if (reportes == null || !reportes.Any())
+                {
+                    response.StatusCode = 404;
+                    response.Message = "Reportes no encontrados verifique el NIT ";
+
+                }
+                else
+                {
+                    response.StatusCode = 200;
+                    response.Message = "Reportes encontrado";
+                    response.Data = reportes;
+                }
+
+                return Json(response);
+            }
+            catch (Exception e)
+            {
+
+                response.StatusCode = 500;
+                response.Message ="Error Controller: \n "+ e.Message;
+
+                return Json(response);
+            }
+        }
 
 
 

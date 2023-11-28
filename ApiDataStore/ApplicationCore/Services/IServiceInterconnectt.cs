@@ -10,6 +10,7 @@ namespace ApplicationCore.Services
    public interface IServiceInterconnectt
     {
         Task<IEnumerable<T_InterConnect>> getByNIT(string NIT);
+        Task<IEnumerable<T_InterConnect>> getByNITDB(string NIT);
 
     }
 }

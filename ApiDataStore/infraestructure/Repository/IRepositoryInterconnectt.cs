@@ -10,5 +10,6 @@ namespace infraestructure.Repository
    public interface IRepositoryInterconnectt
     {
        Task<IEnumerable<T_InterConnect>> getByNIT(string NIT);
+       Task<IEnumerable<T_InterConnect>> getByNITDB(string NIT);
     }
 }
