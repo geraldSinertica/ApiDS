@@ -55,13 +55,13 @@ namespace infraestructure.Repository
         {
             IEnumerable<T_InterConnect> reportes = new List<T_InterConnect>();
 
-            string cadena = ConfigurationManager.ConnectionStrings["ciclonDB"].ToString();
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ciclonDB"].ConnectionString))
+            string cadena = ConfigurationManager.ConnectionStrings["BoeYNicola"].ToString();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BoeYNicola"].ConnectionString))
             {
                 try
                 {
                     connection.Open();
-                    string query = "SELECT CLIENTE, NOMBRE, NIT, LIMITE_CREDITO, TMP, ANT, FACT FROM [dbo].[T_InterConnect] WHERE NIT = @NIT";
+                    string query = "SELECT CLIENTE, NOMBRE, NIT, LIMITE_CREDITO, TMP, ANT, FACT FROM [SOFTLAND].[SOFTLAND].[V_InterConnect] WHERE NIT = @NIT";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -79,10 +79,10 @@ namespace infraestructure.Repository
                                         CLIENTE =  reader["CLIENTE"].ToString() ,
                                         NOMBRE =  reader["NOMBRE"].ToString() ,
                                         NIT =  reader["NIT"].ToString() ,
-                                        LIMITE_CREDITO =  (decimal)reader["LIMITE_CREDITO"] ,
-                                        TMP =  (int)reader["TMP"] ,
-                                        ANT = (int)reader["ANT"],
-                                        FACT =  (int)reader["FACT"]
+                                        LIMITE_CREDITO =    Convert.ToDecimal(reader["LIMITE_CREDITO"].ToString()) ,
+                                        TMP =  Convert.ToInt32( reader["TMP"].ToString()) ,
+                                        ANT = Convert.ToInt32(reader["ANT"].ToString()),
+                                        FACT = Convert.ToInt32(reader["FACT"].ToString())
                                     };
                                     ((List<T_InterConnect>)reportes).Add(reporte);
                                 }
